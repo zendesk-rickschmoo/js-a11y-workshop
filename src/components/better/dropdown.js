@@ -15,6 +15,9 @@ const Dropdown = ({activatorText = 'Dropdown' , items = [] }) => {
         console.log(event.key);
         if (event.key === 'Escape' && isOpen) {
             setIsOpen(false);
+            // BUG - need to wait for re-render
+            // console.log('Button ref: ' + activatorRef.current.querySelector('button'));
+            // activatorRef.current.querySelector('button').focus();
         }
     }
 
@@ -50,7 +53,8 @@ const Dropdown = ({activatorText = 'Dropdown' , items = [] }) => {
             <ul
                 id="dropdown1"
                 ref={dropdownListRef}vocab=""
-                className={`dropdown-itemList ${isOpen ? 'active' : '' }`}
+                className={`dropdown-itemList ${isOpen ? 'active' : null }`}
+                role="list"
             >
                 {items.map((item, index) => {
                     return <li
